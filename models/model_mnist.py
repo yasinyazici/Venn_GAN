@@ -64,7 +64,7 @@ def generator(z_inp, mode=0, num_modes = 1, sn=False, bn=True, is_training=False
         
         return x
 '''
-def discriminator(x_inp, num_agent=1, multi_head=False, sn=False, bn=False, reuse=False, is_training=False, name='disc'):
+def discriminator(x_inp, num_agent=1, features=False, sn=False, bn=False, reuse=False, is_training=False, name='disc'):
     
     with tf.variable_scope(name, reuse=reuse):
         x = x_inp
@@ -83,10 +83,10 @@ def discriminator(x_inp, num_agent=1, multi_head=False, sn=False, bn=False, reus
         out = conv(x, channels=num_agent, kernel=3, stride=1, pad=0, sn=sn, use_bias=True, scope ='conv_3')
         out = tf.squeeze(out)
         
-        if multi_head:
-            out2 = conv(x, channels=1, kernel=3, stride=1, pad=0, sn=sn, use_bias=True, scope ='conv_3_m')
-            out2 = tf.squeeze(out2)
-            return out, out2
+        if features:
+            #out2 = conv(x, channels=1, kernel=3, stride=1, pad=0, sn=sn, use_bias=True, scope ='conv_3_m')
+            #out2 = tf.squeeze(out2)
+            return out, x
         else:
             return out
         

@@ -204,10 +204,14 @@ def spectral_norm(w, iteration=1):
         u_ = tf.matmul(v_hat, w)
         u_hat = l2_norm(u_)
 
+    u_hat = tf.stop_gradient(u_hat)
+    v_hat = tf.stop_gradient(v_hat)
+
     sigma = tf.matmul(tf.matmul(v_hat, w), tf.transpose(u_hat))
-    w_norm = w / sigma
+    #sigma = tf.stop_gradient(sigma)
 
     with tf.control_dependencies([u.assign(u_hat)]):
+        w_norm = w / sigma
         w_norm = tf.reshape(w_norm, w_shape)
 
     return w_norm

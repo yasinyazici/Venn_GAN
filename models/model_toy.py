@@ -29,7 +29,7 @@ def generator(z_inp, mode=0, num_modes = 1, output_dim=2, sn=False, bn=True, is_
         
         return x
 
-def discriminator(x_inp, num_agent=1, multi_head=False, sn=False, reuse=False,name='disc'):
+def discriminator(x_inp, num_agent=1, num_class=None, sn=False, reuse=False,name='disc'):
     
     with tf.variable_scope(name, reuse=reuse):
         x = x_inp
@@ -44,8 +44,10 @@ def discriminator(x_inp, num_agent=1, multi_head=False, sn=False, reuse=False,na
 
         out = fully_connected(x, num_agent, sn=sn, scope='fully_3')
         
-        if multi_head:
-            out2 = fully_connected(x, 1, sn=sn, scope='fully_3_mh')
+        if num_class != None:
+            x = fully_connected(x, d_dim, sn=False, scope='classifier_0')
+            x = lrelu(x, alpha=0.2)
+            out2 = fully_connected(x, num_class, sn=False, scope='classifier_1')
             return out, out2
         else:
             return out

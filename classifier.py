@@ -52,9 +52,9 @@ if not os.path.exists(log_dir):
 path = os.path.normpath(dir_name)
 x = path.split(os.sep)
 if 'users' in x:
-    data_dir = '/home/users/***/***/scratch/data/'
-elif '***' in x:
-    data_dir = '/home/***/Documents/data/'
+    data_dir = '/home/users/ntu/yasin001/scratch/data/'
+elif 'yazici' in x:
+    data_dir = '/home/yazici/Documents/data/'
 else:
     raise NotImplementedError("not implemented")
 
@@ -164,11 +164,11 @@ temp2 = sess.run(c_vars)
 path = os.path.normpath(dir_name)
 x = path.split(os.sep)
 if 'users' in x:
-    np.save('/home/users/***/***/project/cooperation-game-master/logs/c_ema_vars_{}_{}'.format(args.model,args.dataset),np.asarray(temp1))
-    np.save('/home/users/***/***/project/cooperation-game-master/logs/c_vars_{}_{}'.format(args.model,args.dataset),np.asarray(temp2))
-elif '***' in x:
-    np.save('/home/***/Documents/python/cooperation-game-master/logs/c_ema_vars_{}_{}'.format(args.model,args.dataset),np.asarray(temp1))
-    np.save('/home/***/Documents/python/cooperation-game-master/logs/c_vars_{}_{}'.format(args.model,args.dataset),np.asarray(temp2))
+    np.save('/home/users/ntu/yasin001/project/cooperation-game-master/logs/c_ema_vars_{}_{}'.format(args.model,args.dataset),np.asarray(temp1))
+    np.save('/home/users/ntu/yasin001/project/cooperation-game-master/logs/c_vars_{}_{}'.format(args.model,args.dataset),np.asarray(temp2))
+elif 'yazici' in x:
+    np.save('/home/yazici/Documents/python/cooperation-game-master/logs/c_ema_vars_{}_{}'.format(args.model,args.dataset),np.asarray(temp1))
+    np.save('/home/yazici/Documents/python/cooperation-game-master/logs/c_vars_{}_{}'.format(args.model,args.dataset),np.asarray(temp2))
 else:
     raise NotImplementedError("not implemented")
 
